@@ -1,0 +1,36 @@
+[
+
+  {
+
+    "id" : 1,
+    "label" : "Cart Status",
+    "description" : "retrieve the current list of products id in the cart",
+    "path" : "cart/status/",
+    "http" : "POST",
+    "type" : "json"
+
+  },
+
+  [
+
+    {
+
+      "id" : 2,
+      "label" : "Cart Update",
+      "description" : "add one product with id 2 to the cart",
+      "path" : "cart/update/",
+      "parameters" : { "o" : "add", "i" : "2" },
+      "type" : "json",
+      "answer" : "{\"status\":\"OK\"}"
+
+    },
+
+    {
+      "id" : 3,
+      "ref" : 1,
+      "answer" : "[\"1\"]"
+    }
+
+  ]
+
+]

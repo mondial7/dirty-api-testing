@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Dirty Api Testing</title>
+  <meta name="description" content="Do not repeat this in the office.">
+
+  <style>
+
+    body,html { height: 100%; font-family: Arial, sans-serif; }
+    body { background-color: #f2f2f2; color: #333; margin: 0; padding: 0; text-align: center; }
+    header { height: 160px; }
+    main { height: calc(100% - 200px); position: relative; }
+    footer { height: 40px; }
+
+    h2 { line-height: 80px; margin: 0; }
+    header > p { line-height: 80px; max-width: 400px; background-color: #fefefe; box-shadow: 0px 0px 2px #333; margin: auto; }
+
+    .tests { display: none; }
+
+    .bubbles { width: 100%; position: absolute; top: calc(50% - 120px); }
+    .bubble { display: inline-block; width: 150px; height: 150px; border-radius: 50%;
+              cursor: pointer; transition: all 350ms; margin: 40px; transform: rotate(0deg); }
+    .bubble span { line-height: 150px; height: 150px; display: block; }
+    .bubble:hover { transform: scale(1.2) rotate(0deg); }
+
+    .dark { background-color: #333; color: #fefefe; }
+    .light { background-color: #fff; color: #111; }
+
+    .clicked { transform: rotate(400deg) !important; }
+
+    @keyframes bounce {
+        from { transform: scale(1); }
+        to { transform: scale(1.3); }
+    }
+
+    /* style managed by dapit.js */
+    .good { background-color: #2cc12c; color: #fbfbfb; }
+    .bad { background-color: #ca1e1e; color: #fefefe; animation: bounce 700ms infinite reverse; }
+    .sleeping { background-color: orange; color: black !important; }
+    /* end dapit.js styles */
+
+  </style>
+
+</head>
+<body>
+
+  <header>
+
+    <h2>Dirty Api Testing</h2>
+    <p id="dapit__messages">Do not repeat this in the office</p>
+
+  </header>
+
+  <main>
+
+    <section class="bubbles">
+
+      <div class="bubble dark">
+
+        <span id="test_loader">Load Tests</span>
+
+      </div>
+
+      <div class="bubble dark">
+
+        <span id="test_runner">Run Tests</span>
+
+      </div>
+
+      <div class="bubble sleeping">
+
+        <span id="test_viewer">0 %</span>
+
+      </div>
+
+    </section>
+
+
+    <section class="tests">
+
+      <div class="test__box">
+
+        <p class="test__label"></p>
+        <p class="test__description"></p>
+
+        <span class="test__progress"></span>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+  <footer>
+
+    <span></span>
+
+  </footer>
+
+  <script src="vendor/oldwheel.min.js"></script>
+  <script src="js/dapit.js"></script>
+  <script src="js/dirty-app.js"></script>
+
+</body>
+</html>
