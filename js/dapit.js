@@ -50,7 +50,7 @@ DapiT = (function(wheel){
     _DT.notify('loading configs ...')
 
     // Load configs
-    wheel.get({ url : './dapit.json' }, function(configs){
+    wheel.get({ url : './dapit.json?' + _random() }, function(configs){
 
       // store configs
       _DT.configs = JSON.parse(configs)
@@ -58,7 +58,7 @@ DapiT = (function(wheel){
       _DT.notify('loading tests ...')
 
       // load tests
-      wheel.get({ url : _DT.configs.testsurl }, function(tests){
+      wheel.get({ url : _DT.configs.testsurl + '?' + _random() }, function(tests){
 
         // store tests array
         _DT.tests = JSON.parse(tests)
@@ -166,13 +166,26 @@ DapiT = (function(wheel){
 
     }
 
+    if (_DT.logg) {
+
+      console.log(test)
+
+    }
+
     // switch between single test and set of tests
     if (typeof test.length === 'undefined') {
 
       _DT.notify('running test: ' + test.id + ' - ' + test.label);
 
       // execute the test
-      _call(test)
+      // set delay to call
+      // TODO that's not the proper way (no brain right now to think about a solution)
+      // the call should be synchronous inside each set of tests
+      _sleep((1000 * test.id)).then(() => {
+
+        _call(test)
+
+      })
 
     } else if (test.length > 1) {
 
@@ -205,22 +218,28 @@ DapiT = (function(wheel){
 
       let url = _defineUrl(test)
 
+      if (_DT.logg) {
+
+        _DT.notify('calling url: ' + url + ' for test: ' + test.id, true)
+
+      }
+
       wheel.get({ url : url }, function(response){
 
         _testCallback(response, test)
 
       });
 
-      if (_DT.logg) {
-
-        _DT.notify('called url: ' + url + ' for test: ' + test.id, true)
-
-      }
-
     } else if (test.http === 'POST') {
 
       let url = _defineUrl(test, isPost),
           data = { url : url }
+
+      if (_DT.logg) {
+
+        _DT.notify('calling url: ' + url + ' for test: ' + test.id, true)
+
+      }
 
       // check parameters attribute
       if (typeof test.parameters !== 'undefined') {
@@ -234,12 +253,6 @@ DapiT = (function(wheel){
         _testCallback(response, test)
 
       });
-
-      if (_DT.logg) {
-
-        _DT.notify('called url: ' + url + ' for test: ' + test.id, true)
-
-      }
 
     } else {
 
@@ -279,8 +292,10 @@ DapiT = (function(wheel){
    */
   function _testCallback(response, test) {
 
+    _DT.notify('Test ' + test.id + ' done')
+
     // match response
-    if (response === test.answer) {
+    if (response == test.answer) {
 
       SUCCESS_COUNTER++
 
@@ -288,6 +303,8 @@ DapiT = (function(wheel){
 
       // add test to failed list
       _DT.failedList.push(test)
+
+      _DT.notify('Test ' + test.id + ' failed')
 
     }
 
@@ -449,6 +466,26 @@ DapiT = (function(wheel){
   function _renderTestsInfo() {
 
     // ...
+
+  }
+
+  /**
+   * Sleep time expects milliseconds
+   *
+   */
+  function _sleep(ms) {
+
+    return new Promise((resolve) => setTimeout(resolve, ms))
+
+  }
+
+  /**
+   * Random int
+   *
+   */
+  function _random() {
+
+    return Math.trunc(Math.random()*1000000)
 
   }
 

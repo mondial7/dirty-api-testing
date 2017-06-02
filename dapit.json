@@ -2,6 +2,6 @@
 
   "baseurl" : "http://localhost:8888/Information-Security/api/",
 
-  "testsurl" : "dapit.tests.json"
+  "testsurl" : "./tests/agrishop.tests.json"
 
 }

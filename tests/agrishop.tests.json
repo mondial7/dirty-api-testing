@@ -1,0 +1,74 @@
+[
+
+  [
+
+    {
+
+      "id" : 1,
+      "label" : "Cart Empty",
+      "description" : "reset the cart, empty from any item",
+      "path" : "cart/update/?o=empty&i=1",
+      "answer" : "{\"status\":\"OK\"}"
+
+    },
+
+    {
+
+      "id" : 2,
+      "label" : "Cart Status",
+      "description" : "retrieve the current list of products id in the cart",
+      "path" : "cart/status/",
+      "answer" : "[]"
+
+    }
+
+  ],
+
+  [
+
+    {
+
+      "id" : 3,
+      "label" : "Cart Update",
+      "description" : "add one product with id 2 to the cart",
+      "path" : "cart/update/",
+      "parameters" : { "o" : "add", "i" : "2" },
+      "answer" : "{\"status\":\"OK\"}"
+
+    },
+
+    {
+
+      "id" : 4,
+      "label" : "Cart Update",
+      "description" : "add one product with id 7 to the cart",
+      "path" : "cart/update/",
+      "parameters" : { "o" : "add", "i" : "7" },
+      "answer" : "{\"status\":\"OK\"}"
+
+    },
+
+    {
+
+      "id" : 5,
+      "label" : "Cart Update",
+      "description" : "add one product with id 2 to the cart",
+      "path" : "cart/update/",
+      "parameters" : { "o" : "add", "i" : "2" },
+      "answer" : "{\"status\":\"OK\"}"
+
+    },
+
+    {
+
+      "id" : 6,
+      "label" : "Cart Status",
+      "description" : "retrieve the current list of products id in the cart",
+      "path" : "cart/status/",
+      "answer" : "[\"2\",\"7\"]"
+
+    }
+
+  ]
+
+]
